@@ -44,32 +44,42 @@ To connect the Docker client to the Docker daemon, please set:
 
 
 ```
+Reinstalling openssl and python in case you get certificate error
+
 ```
 brew reinstall openssl python
 pip install requests[security]
 ```
 
+Obtain bootdocker ip
+
 ```
 boot2docker ip
 ```
+
 ```
 CREATE DATABASE imbuedb WITH OWNER imbue ENCODING 'UTF8';
-
 CREATE ROLE imbue superuser;  
 ALTER ROLE imbue WITH LOGIN;
 ALTER USER imbue WITH PASSWORD 'imbue';
 ALTER DATABASE imbuedb OWNER TO imbue;
+```
 
 Drop database
+
+```
 DROP DATABASE "imbuedb";
+```
 
 Export database
+```
 pg_dump -U USERNAME DBNAME > dbexport.pgsql
+```
 
 Import database
 
+```
 psql -h 192.168.59.103 -p 5432 -U imbue imbuedb < imbuedb.db_010715 
-
 ```
 
 
