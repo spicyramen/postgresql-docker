@@ -1,5 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER Andrea Grandi <a.grandi@gmail.com>
+MAINTAINER Gonzalo Gasca Meza <gonzalo@parzee.com>
 
 # Add the PostgreSQL PGP key to verify their Debian packages.
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
@@ -18,9 +19,13 @@ RUN apt-get update && apt-get -y -q install python-software-properties software-
 
 USER postgres
 
+# Create imbuedb and user
+
 RUN /etc/init.d/postgresql start \
+    && psql --command "CREATE DATABASE imbuedb WITH OWNER imbue ENCODING 'UTF8';" \
+    && psql --command "CREATE USER imbue WITH SUPERUSER PASSWORD 'imbue';ALTER ROLE imbue WITH LOGIN;ALTER DATABASE imbuedb OWNER TO imbue;" \
     && psql --command "CREATE USER pguser WITH SUPERUSER PASSWORD 'pguser';" \
-    && createdb -O pguser pgdb
+    && createdb -O pguser pgdb \
 
 USER root
 

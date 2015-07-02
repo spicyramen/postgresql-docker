@@ -1,2 +1,75 @@
 # postgresql-docker
 Docker image for PostgreSQL
+```
+$ boot2docker init
+```
+Installation using boot2docker
+
+```
+Latest release for github.com/boot2docker/boot2docker is v1.7.0
+Downloading boot2docker ISO image...
+Success: downloaded https://github.com/boot2docker/boot2docker/releases/download/v1.7.0/boot2docker.iso
+	to /Users/gogasca/.boot2docker/boot2docker.iso
+Generating public/private rsa key pair.
+Your identification has been saved in /Users/gogasca/.ssh/id_boot2docker.
+Your public key has been saved in /Users/gogasca/.ssh/id_boot2docker.pub.
+The key fingerprint is:
+c7:26:42:1a:45:cd:5a:4a:b7:80:78:28:9f:be:5b:59 gogasca@gonzo.local
+The key's randomart image is:
++--[ RSA 2048]----+
+|   o ooo         |
+|. o o.o =        |
+| o o...* .       |
+|  o  +o ..       |
+| .  . E S +      |
+|  .  o . +       |
+|   .o            |
+|  ..             |
+|  ..             |
++-----------------+
+gonzo:PostgreSQL gogasca$ docker search -s 100 redis
+Get http:///var/run/docker.sock/v1.19/images/search?term=redis: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?
+gonzo:PostgreSQL gogasca$ boot2docker start
+Waiting for VM and Docker daemon to start...
+.........................oooooooooooooooooooooo
+Started.
+Writing /Users/gogasca/.boot2docker/certs/boot2docker-vm/ca.pem
+Writing /Users/gogasca/.boot2docker/certs/boot2docker-vm/cert.pem
+Writing /Users/gogasca/.boot2docker/certs/boot2docker-vm/key.pem
+
+To connect the Docker client to the Docker daemon, please set:
+    export DOCKER_HOST=tcp://192.168.59.103:2376
+    export DOCKER_CERT_PATH=/Users/gogasca/.boot2docker/certs/boot2docker-vm
+    export DOCKER_TLS_VERIFY=1
+
+
+```
+```
+brew reinstall openssl python
+pip install requests[security]
+```
+
+```
+boot2docker ip
+```
+```
+CREATE DATABASE imbuedb WITH OWNER imbue ENCODING 'UTF8';
+
+CREATE ROLE imbue superuser;  
+ALTER ROLE imbue WITH LOGIN;
+ALTER USER imbue WITH PASSWORD 'imbue';
+ALTER DATABASE imbuedb OWNER TO imbue;
+
+Drop database
+DROP DATABASE "imbuedb";
+
+Export database
+pg_dump -U USERNAME DBNAME > dbexport.pgsql
+
+Import database
+
+psql -h 192.168.59.103 -p 5432 -U imbue imbuedb < imbuedb.db_010715 
+
+```
+
+
