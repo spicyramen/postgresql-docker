@@ -53,6 +53,7 @@ Obtain bootdocker ip
 
 ```
 boot2docker ip
+192.168.59.103
 ```
 
 Reference:
@@ -90,7 +91,7 @@ DROP DATABASE "imbuedb";
 
 Export database
 ```
-pg_dump -U USERNAME DBNAME > dbexport.pgsql
+pg_dump -U imbue imbuedb > imbuedb.db_010715 
 ```
 
 Import database
