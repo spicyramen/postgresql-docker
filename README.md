@@ -1,11 +1,9 @@
 # postgresql-docker
 Docker image for PostgreSQL
-```
-$ boot2docker init
-```
 Installation using boot2docker
 
 ```
+$ boot2docker init
 Latest release for github.com/boot2docker/boot2docker is v1.7.0
 Downloading boot2docker ISO image...
 Success: downloaded https://github.com/boot2docker/boot2docker/releases/download/v1.7.0/boot2docker.iso
@@ -27,9 +25,8 @@ The key's randomart image is:
 |  ..             |
 |  ..             |
 +-----------------+
-gonzo:PostgreSQL gogasca$ docker search -s 100 redis
-Get http:///var/run/docker.sock/v1.19/images/search?term=redis: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?
-gonzo:PostgreSQL gogasca$ boot2docker start
+
+$ boot2docker start
 Waiting for VM and Docker daemon to start...
 .........................oooooooooooooooooooooo
 Started.
@@ -56,6 +53,10 @@ Obtain bootdocker ip
 ```
 boot2docker ip
 ```
+
+How to create a Docker image for PostgreSQL and persist data
+
+http://www.andreagrandi.it/2015/02/21/how-to-create-a-docker-image-for-postgresql-and-persist-data/
 
 ```
 CREATE DATABASE imbuedb WITH OWNER imbue ENCODING 'UTF8';
