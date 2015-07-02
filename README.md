@@ -41,6 +41,7 @@ To connect the Docker client to the Docker daemon, please set:
 
 
 ```
+
 Reinstalling openssl and python in case you get certificate error
 
 ```
@@ -54,9 +55,24 @@ Obtain bootdocker ip
 boot2docker ip
 ```
 
+Reference:
 How to create a Docker image for PostgreSQL and persist data
-
 http://www.andreagrandi.it/2015/02/21/how-to-create-a-docker-image-for-postgresql-and-persist-data/
+
+
+Built docker instance
+
+```
+docker build --rm=true -t spicyramen/postgresql:9.3 .
+```
+
+Run docker instance
+```
+docker run -i -t -p 5432:5432 spicyramen/postgresql:9.3
+```
+Check instructions in previous link for data persistance
+
+Database operations
 
 ```
 CREATE DATABASE imbuedb WITH OWNER imbue ENCODING 'UTF8';

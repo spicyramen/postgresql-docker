@@ -19,13 +19,19 @@ RUN apt-get update && apt-get -y -q install python-software-properties software-
 
 USER postgres
 
-# Create imbuedb and user
+# Create imbuedb and user. Add options to add a database using UNICODE
 
 RUN /etc/init.d/postgresql start \
+	&& psql --command "UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';" \
+	&& psql --command "DROP DATABASE template1;" \
+	&& psql --command "CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';" \
+	&& psql --command "UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';" \
+	&& psql --command "\c template1;" \
+	&& psql --command "VACUUM FREEZE;" \	
     && psql --command "CREATE DATABASE imbuedb ENCODING 'UTF8';" \
     && psql --command "CREATE USER imbue WITH SUPERUSER PASSWORD 'imbue';ALTER ROLE imbue WITH LOGIN;ALTER DATABASE imbuedb OWNER TO imbue;" \
     && psql --command "CREATE USER pguser WITH SUPERUSER PASSWORD 'pguser';" \
-    && createdb -O pguser pgdb \
+    && createdb -O pguser pgdb 
 
 USER root
 
