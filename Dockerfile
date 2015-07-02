@@ -22,7 +22,7 @@ USER postgres
 # Create imbuedb and user
 
 RUN /etc/init.d/postgresql start \
-    && psql --command "CREATE DATABASE imbuedb WITH OWNER imbue ENCODING 'UTF8';" \
+    && psql --command "CREATE DATABASE imbuedb ENCODING 'UTF8';" \
     && psql --command "CREATE USER imbue WITH SUPERUSER PASSWORD 'imbue';ALTER ROLE imbue WITH LOGIN;ALTER DATABASE imbuedb OWNER TO imbue;" \
     && psql --command "CREATE USER pguser WITH SUPERUSER PASSWORD 'pguser';" \
     && createdb -O pguser pgdb \
